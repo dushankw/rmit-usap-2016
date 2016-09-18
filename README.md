@@ -2,8 +2,6 @@
 
 ### Preface
 
-How are you guys finding the course, I was not involved this year?
-
 * What is AWS
   * What is EC2
   * What is VPC
