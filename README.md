@@ -11,9 +11,6 @@ How are you guys finding the course, I was not involved this year?
     * What is a stack
     * What is our stack creating
 * What is an SSH key
-* What is Puppet
-  * Why do we need it
-* Thanks to REA for letting me come
 
 Note: Anywhere you see `sXXXXXXX` put your student number.
 Note: You should do all the following on the RMIT core teaching machines
