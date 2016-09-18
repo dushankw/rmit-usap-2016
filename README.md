@@ -93,11 +93,17 @@ ParameterKey=SubnetId,ParameterValue=SUBNETID \
 ParameterKey=KeyName,ParameterValue=sXXXXXXX
 ```
 
+If you are feeling creative, modify the CloudFormation to restrict the security groups to the RMIT IP space (`131.170.0.0/16`)
+
+Groups that are open to the world are acceptable in a learning environment, but never in production!
+
 ### Connecting to the Instance
 
 Get the public hostname from the Stack Outputs
 
 `aws cloudformation describe-stacks --stack-name sXXXXXXX --query 'Stacks[*].Outputs'`
+
+(If you don't see a PublicDnsName make sure your VPC has DNS Hostnames enabled)
 
 ```
 [

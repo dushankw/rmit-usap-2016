@@ -4,7 +4,7 @@
 
 0. sudo -s
 1. yum -y update
-2. yum -y install wget
+2. yum -y install wget vim
 3. cd /tmp
 4. wget http://titan.csit.rmit.edu.au/~e09962/usap2015/puppet/puppet.tar.gz
 5. tar -zxvf puppet.tar.gz
@@ -19,26 +19,29 @@
 
 ```
 class usaptest {
-    user { 'becca':
-        ensure => present,
-        groups => ['rmit'],
-    }
+  user { 'becca':
+    ensure => present,
+    groups => ['rmit'],
+  }
 
-    group { 'rmit':
-        ensure => present,
-    }
+  group { 'rmit':
+    ensure => present,
+  }
 
-    package { 'vim':
-        ensure => present,
-    }
+  package { 'vim':
+    ensure => present,
+  }
 }
 ```
 
-Put this on the master in CHANGEME
-
-Let's apply this via the PE console
-
-Let's prove it worked
+0. Put this on the master in `/etc/puppetlabs/code/environments/production/manifests/usaptest.pp`
+1. Validate the file with `/usr/local/bin/puppet parser validate WHATEVER.pp`
+2. Let's apply this via the PE console (lecture demo)
+  0. Log in and go to `Nodes` > `Classification`
+  1. Create a new `Node Group` called `usap`
+  2. Add our class `usaptest` under `Classes `and pin our master under `Rules`
+    0. Make sure to commit all changes
+3. Let's prove it worked (you can force a run with `/usr/local/bin/puppet agent apply --test`)
 
 ### Things to discuss
 
