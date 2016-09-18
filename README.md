@@ -10,8 +10,8 @@
     * What is our stack creating
 * What is an SSH key
 
-Note: Anywhere you see `sXXXXXXX` put your student number.
-Note: You should do all the following on the RMIT core teaching machines
+* Note: Anywhere you see `sXXXXXXX` put your student number.
+* Note: You should do all the following on the RMIT core teaching machines
 
 ### Creating an IAM User
 
