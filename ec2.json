@@ -1,0 +1,132 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "An instance to run Puppet (WARNING: NOT IN FREE TIER, WILL COST MONEY)",
+    "Parameters": {
+        "VpcId" : {
+            "Description" : "The VPC we are to launch our instance in",
+            "Type" : "AWS::EC2::VPC::Id"
+        },
+        "ImageId": {
+            "Description": "The AMI ID to use to launch the instance",
+            "Type": "AWS::EC2::Image::Id",
+            "Default" : "ami-e0c19f83"
+        },
+        "InstanceType": {
+            "Description": "Type of the instance to launch",
+            "Type": "String",
+            "Default": "t2.medium"
+        },
+        "KeyName": {
+            "Description": "Key pair to install by default",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "Default": "AWS::NoValue"
+        },
+        "SourceDestCheck": {
+            "Description": "Whether the traffic filter is applied before packets reach the instance or not",
+            "Type": "String",
+            "Default": "true"
+        },
+        "SubnetId": {
+            "Description": "The Id of the subnet the instance is going to be launched to",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "AssociatePublicIpAddress": {
+            "Description": "Whether to automatically assign a public IP to the instance or not",
+            "Type": "String",
+            "Default": "true"
+        }
+    },
+    "Resources": {
+        "Instance": {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "ImageId" : { "Ref": "ImageId" },
+                "InstanceType" : { "Ref": "InstanceType" },
+                "KeyName" : { "Ref": "KeyName" },
+                "SourceDestCheck" : { "Ref": "SourceDestCheck" },
+                "BlockDeviceMappings" : [
+                    {
+                        "DeviceName" : "/dev/sda1",
+                        "Ebs" : { "VolumeSize" : "30" }
+                    }
+                ],
+                "Tags" : [
+                    {
+                        "Key" : "Name",
+                        "Value" : "puppet-master"
+                    }
+                ],
+                "NetworkInterfaces": [
+                    {
+                        "GroupSet": [ { "Ref": "SecurityGroup" } ],
+                        "AssociatePublicIpAddress": { "Ref": "AssociatePublicIpAddress" },
+                        "DeviceIndex": "0",
+                        "DeleteOnTermination": "true",
+                        "SubnetId": { "Ref": "SubnetId" }
+                    }
+                ]
+            }
+        },
+        "SecurityGroup" : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "SSH, ICMP, HTTP, HTTPS and 3000/TCP (Puppet) from world",
+                "VpcId": { "Ref": "VpcId" },
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "-1",
+                        "IpProtocol": "icmp",
+                        "ToPort": "-1"
+                    },
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    },
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "FromPort": "3000",
+                        "IpProtocol": "tcp",
+                        "ToPort": "3000"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "InstanceId": {
+            "Description": "The Id of the created instance",
+            "Value": { "Ref": "Instance" }
+        },
+        "AvailabilityZone": {
+            "Description": "The availability zone the instance was launched into",
+            "Value": { "Fn::GetAtt": [ "Instance", "AvailabilityZone" ] }
+        },
+        "PrivateDnsName": {
+            "Description": "The private DNS name assigned to the instance",
+            "Value": { "Fn::GetAtt": [ "Instance", "PrivateDnsName" ] }
+        },
+        "PublicDnsName": {
+            "Description": "The public DNS name assigned to the instance",
+            "Value": { "Fn::GetAtt": [ "Instance", "PublicDnsName" ] }
+        },
+        "PrivateIp": {
+            "Description": "The private IP address assigned to the instance",
+            "Value": { "Fn::GetAtt": [ "Instance", "PrivateIp" ] }
+        }
+    }
+}
