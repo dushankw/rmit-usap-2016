@@ -2,6 +2,7 @@
 
 ### Installation Guide
 
+```
 0. sudo -s
 1. yum -y update
 2. yum -y install wget vim
@@ -14,6 +15,7 @@
 9. Ignore any validation errors (our server is fine for testing)
 10. Hit deploy now and wait until it is done
 11. Log into the console once it's finished
+```
 
 ### Our first module
 
