@@ -51,5 +51,4 @@ Let's prove it worked
 
 ### Next steps
 
-Docs https://docs.puppet.com/pe/2015.3/
-(make sure you refer to the 2015.3 docs at all times, there are breaking changes in newer versions)
+Docs https://docs.puppet.com/pe/2015.3/ (make sure you refer to the 2015.3 docs at all times, there are breaking changes in newer versions)
