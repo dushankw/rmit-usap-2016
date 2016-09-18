@@ -16,6 +16,7 @@ How are you guys finding the course, I was not involved this year?
 * Thanks to REA for letting me come
 
 Note: Anywhere you see `sXXXXXXX` put your student number.
+Note: You should do all the following on the RMIT core teaching machines
 
 ### Creating an IAM User
 
