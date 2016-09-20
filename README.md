@@ -15,7 +15,7 @@
 
 ### Creating an IAM User
 
-0. Do this on your own, see [[IAM.md]]
+0. Do this on your own, see [IAM](IAM.md)
 1. These credentials should be treated like a password, that's basically what they are
   0. You can put them in your `~/.bashrc` but make sure the file is only readable by you `chmod 600 ~/.bashrc`
   1. You can also export them manually for each shell, the choice is yours
