@@ -58,4 +58,6 @@ class usaptest {
 
 ### Next steps
 
-Docs https://docs.puppet.com/pe/2015.3/ (make sure you refer to the 2015.3 docs at all times, there are breaking changes in newer versions)
+* Docs https://docs.puppet.com/pe/2015.3/ (make sure you refer to the 2015.3 docs at all times, there are breaking changes in newer versions)
+* Here we are using the master to manage itself, how would you connect a new node to the master and manage it?
+  * What are all the steps required (instance, network, firewall, authentication, configuration, etc...)
