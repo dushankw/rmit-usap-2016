@@ -82,7 +82,7 @@ Take note of the `VpcId` and one `SubnetId`
 
 ### Starting an EC2 Instance using AWS CloudFormation
 
-**THIS WILL COST YOU MONEY**
+**THIS WILL COST YOU MONEY - CONSIDER SHUTTING DOWN THE INSTANCE WHEN YOU DON'T NEED IT**
 
 Deploy the stack using CloudFormation (substitute the parameters you obtained earlier)
 

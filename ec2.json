@@ -21,29 +21,27 @@
             "Type": "AWS::EC2::KeyPair::KeyName",
             "Default": "AWS::NoValue"
         },
-        "SourceDestCheck": {
-            "Description": "Whether the traffic filter is applied before packets reach the instance or not",
-            "Type": "String",
-            "Default": "true"
-        },
         "SubnetId": {
             "Description": "The Id of the subnet the instance is going to be launched to",
             "Type": "AWS::EC2::Subnet::Id"
-        },
-        "AssociatePublicIpAddress": {
-            "Description": "Whether to automatically assign a public IP to the instance or not",
-            "Type": "String",
-            "Default": "true"
         }
     },
     "Resources": {
+        "Eip" : {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+                "InstanceId" : { "Ref" : "Instance" },
+                "Domain" : "vpc"
+            }
+        },
         "Instance": {
             "Type" : "AWS::EC2::Instance",
             "Properties" : {
                 "ImageId" : { "Ref": "ImageId" },
                 "InstanceType" : { "Ref": "InstanceType" },
                 "KeyName" : { "Ref": "KeyName" },
-                "SourceDestCheck" : { "Ref": "SourceDestCheck" },
+                "SubnetId" : { "Ref" : "SubnetId" },
+                "SecurityGroupIds" : [ { "Ref" : "SecurityGroup" } ],
                 "BlockDeviceMappings" : [
                     {
                         "DeviceName" : "/dev/sda1",
@@ -54,15 +52,6 @@
                     {
                         "Key" : "Name",
                         "Value" : "puppet-master"
-                    }
-                ],
-                "NetworkInterfaces": [
-                    {
-                        "GroupSet": [ { "Ref": "SecurityGroup" } ],
-                        "AssociatePublicIpAddress": { "Ref": "AssociatePublicIpAddress" },
-                        "DeviceIndex": "0",
-                        "DeleteOnTermination": "true",
-                        "SubnetId": { "Ref": "SubnetId" }
                     }
                 ]
             }
