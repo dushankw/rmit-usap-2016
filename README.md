@@ -1,4 +1,4 @@
-# USAP Guest Lecture
+# USAP Guest Lecture (re-written for 2017)
 
 ### Preface
 
