@@ -2,16 +2,16 @@
 
 ### Preface
 
-* What is AWS
-  * What is EC2
-  * What is VPC
-  * What is CloudFormation
-    * What is a stack
-    * What is our stack creating
-* What is an SSH key
+This document will guide you in using Amazons config-as-code product (CloudFormation) to create an EC2 instance to serve as your Puppet Master.
 
-* Note: Anywhere you see `sXXXXXXX` put your student number.
-* Note: You should do all the following on the RMIT core teaching machines
+Read the following links (especially if you have never used Amazon Web Services before)
+
+* https://aws.amazon.com/what-is-aws/
+* https://aws.amazon.com/ec2/
+* https://aws.amazon.com/vpc/
+* https://aws.amazon.com/cloudformation/
+
+Note: Anywhere you see `sXXXXXXX` put your student number.
 
 ### Creating an IAM User
 
@@ -38,7 +38,7 @@ AWS_REGION=ap-southeast-2
 
 1. Reload your shell `exec bash`
 
-### Generating and uploading an SSH Key
+### Generating and uploading an SSH Key (this should have been covered in earlier classes)
 
 0. `ssh-keygen -t rsa -b 4096 -f ~/.ssh/sXXXXXXX`
   0. It will ask you for an encryption passphrase, put one you will remember
