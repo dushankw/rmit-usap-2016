@@ -1,5 +1,11 @@
 # Puppet
 
+### Preface
+
+This tutorial is using Puppet 2015.03.
+
+This is not the latest version of Puppet, future classes may require you to install a newer version!
+
 ### Installation Guide
 
 ```
