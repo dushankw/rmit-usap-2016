@@ -9,7 +9,7 @@
         "ImageId": {
             "Description": "The AMI ID to use to launch the instance",
             "Type": "AWS::EC2::Image::Id",
-            "Default" : "ami-e0c19f83"
+            "Default" : "ami-ccecf5af"
         },
         "InstanceType": {
             "Description": "Type of the instance to launch",
@@ -24,6 +24,15 @@
         "SubnetId": {
             "Description": "The Id of the subnet the instance is going to be launched to",
             "Type": "AWS::EC2::Subnet::Id"
+        },
+        "TrustedOrigin" : {
+            "Type": "String",
+            "Default": "0.0.0.0/0",
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "Must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Description": "Allow connections from this address (you should lock this down if you can)",
+            "MaxLength": "18",
+            "MinLength": "9"
         }
     },
     "Resources": {
@@ -53,41 +62,52 @@
                         "Key" : "Name",
                         "Value" : "puppet-master"
                     }
-                ]
+                ],
+                "UserData" : {
+                    "Fn::Base64" : {
+                        "Fn::Join" : ["",
+                            [
+                                "#!/bin/bash\n",
+                                "set -xeuo pipefail\n",
+                                "yum -y update\n"
+                            ]
+                        ]
+                    }
+                }
             }
         },
         "SecurityGroup" : {
             "Type" : "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupDescription": "SSH, ICMP, HTTP, HTTPS and 3000/TCP (Puppet) from world",
+                "GroupDescription": "SSH, ICMP, HTTP, HTTPS and 3000/TCP (Puppet)",
                 "VpcId": { "Ref": "VpcId" },
                 "SecurityGroupIngress": [
                     {
-                        "CidrIp" : "0.0.0.0/0",
+                        "CidrIp" : { "Ref" : "TrustedOrigin" },
                         "FromPort": "22",
                         "IpProtocol": "tcp",
                         "ToPort": "22"
                     },
                     {
-                        "CidrIp": "0.0.0.0/0",
+                        "CidrIp" : { "Ref" : "TrustedOrigin" },
                         "FromPort": "-1",
                         "IpProtocol": "icmp",
                         "ToPort": "-1"
                     },
                     {
-                        "CidrIp" : "0.0.0.0/0",
+                        "CidrIp" : { "Ref" : "TrustedOrigin" },
                         "FromPort": "80",
                         "IpProtocol": "tcp",
                         "ToPort": "80"
                     },
                     {
-                        "CidrIp" : "0.0.0.0/0",
+                        "CidrIp" : { "Ref" : "TrustedOrigin" },
                         "FromPort": "443",
                         "IpProtocol": "tcp",
                         "ToPort": "443"
                     },
                     {
-                        "CidrIp" : "0.0.0.0/0",
+                        "CidrIp" : { "Ref" : "TrustedOrigin" },
                         "FromPort": "3000",
                         "IpProtocol": "tcp",
                         "ToPort": "3000"
