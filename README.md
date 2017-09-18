@@ -2,7 +2,7 @@
 
 ### Preface
 
-This document will guide you in using Amazons config-as-code product (CloudFormation) to create an EC2 instance to serve as your Puppet Master.
+This document will guide you in using Amazon's config-as-code product (CloudFormation) to create an EC2 instance to serve as your Puppet Master.
 
 Read the following links (especially if you have never used Amazon Web Services before)
 
@@ -17,10 +17,10 @@ Note: Anywhere you see `sXXXXXXX` put your student number.
 
 0. Do this on your own, see [IAM](IAM.md)
 1. These credentials should be treated like a password, that's basically what they are
-  0. You can put them in your `~/.bashrc` but make sure the file is only readable by you `chmod 600 ~/.bashrc`
-  1. You can also export them manually for each shell, the choice is yours
+  0. In your shell, run `aws configure` and enter the credentials when prompted
+  1. You can also export them manually for each shell session, the choice is yours
 
-  Regardless, they are to be exported as follows
+  They can be exported as follows
 
   ```
   export AWS_ACCESS_KEY_ID=CHANGEME
