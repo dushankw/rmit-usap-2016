@@ -42,16 +42,16 @@ class usaptest {
 }
 ```
 
-0. Put this on the master in `/etc/puppetlabs/code/environments/production/manifests/usaptest.pp`
-  0. In the real world, you would be writing the code on your local machine and committing it to git
-  1. Then a CI job or something similar would deploy it to the master
-1. Validate the file with `/usr/local/bin/puppet parser validate WHATEVER.pp`
-2. Let's apply this via the PE console (lecture demo)
-  0. Log in and go to `Nodes` > `Classification`
-  1. Create a new `Node Group` called `usap`
-  2. Add our class `usaptest` under `Classes `and pin our master under `Rules`
-    0. Make sure to commit all changes
-3. Let's prove it worked (you can force a run with `/usr/local/bin/puppet agent apply --test`)
+0. Put this code on the master in `/etc/puppetlabs/code/environments/production/manifests/usaptest.pp`
+1. Validate the file with `/usr/local/bin/puppet parser validate WHATEVER.pp` (make sure there are no errors)
+
+Let's apply this via the PE console (lecture demo)
+
+0. Log in and go to `Nodes` > `Classification`
+1. Create a new `Node Group` called `usap`
+2. Add our class `usaptest` under `Classes `and pin our master under `Rules`
+3. Make sure to commit all changes
+4. Let's prove it worked (you can force a run with `/usr/local/bin/puppet agent apply --test`)
 
 ### Things to discuss
 
