@@ -18,8 +18,7 @@
         },
         "KeyName": {
             "Description": "Key pair to install by default",
-            "Type": "AWS::EC2::KeyPair::KeyName",
-            "Default": "AWS::NoValue"
+            "Type": "AWS::EC2::KeyPair::KeyName"
         },
         "SubnetId": {
             "Description": "The Id of the subnet the instance is going to be launched to",
